@@ -1,0 +1,15 @@
+-- JABODETABEK AS SUM OF TOTAL IN EACH CITY
+
+WITH hc AS(
+  SELECT merchant.city as City,COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+  FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+  LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+  ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+  AND transact.store_code = merchant.store_code
+  WHERE city LIKE 'Jak%' OR city LIKE 'Bog%' OR city LIKE 'Dep%' OR city LIKE 'Tang%' OR city LIKE 'Bek%' OR city LIKE 'Cik%' AND
+  txndate BETWEEN '2020-06-13' AND '2020-06-19'
+  GROUP BY merchant.city
+)
+SELECT 'JABODETABEK'as City,SUM(DISTINCT hc.total_unique_customer) as total_unique_customer FROM hc 
+UNION ALL
+SELECT * FROM hc ORDER BY total_unique_customer DESC;

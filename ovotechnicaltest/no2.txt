@@ -1,0 +1,18 @@
+WITH hc AS( SELECT
+  FORMAT_DATE('%b %Y', txndate) as month_year,
+  merchant.city as city, 
+  (SUM(amount)/COUNT(txn_id)) as avg_amount, 
+  SUM(amount) as amount, 
+  COUNT(txn_id) as txn
+  FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+  LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+  ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+  AND transact.store_code = merchant.store_code
+  GROUP BY month_year,city
+  ORDER BY month_year,avg_amount DESC
+)
+SELECT *,
+  RANK() OVER(PARTITION BY hc.month_year ORDER BY hc.avg_amount DESC) as rnk  FROM hc
+WHERE txn>=100
+QUALIFY rnk<=5
+;

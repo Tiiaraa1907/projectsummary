@@ -1,0 +1,70 @@
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-08-01' AND '2020-08-31'
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-07-01' AND '2020-08-31'
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-07-01' AND '2020-07-31'
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-06-01' AND '2020-06-30' OR txndate BETWEEN '2020-08-01' AND '2020-08-31'
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-06-01' AND '2020-08-31' 
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-06-01' AND '2020-07-31'
+
+UNION ALL
+
+SELECT STRING_AGG(DISTINCT FORMAT_DATE('%b %Y', txndate),',')as mnthx,
+COUNT(DISTINCT transact.ovo_id) as total_unique_customer
+FROM `ovotechnicaltest.ovo.ovo_transaction` transact
+LEFT JOIN `ovotechnicaltest.ovo.ovo_ref_merchant` merchant
+ON transact.merchant_id = merchant.merchant_id AND transact.merchant_name = merchant.merchant_name 
+AND transact.store_code = merchant.store_code
+WHERE txndate BETWEEN '2020-06-01' AND '2020-06-30'
+
+ORDER BY mnthx
+;
